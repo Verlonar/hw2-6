@@ -22,14 +22,12 @@ public class Main {
         split();
 
         //Задание 4
-        int repeatWordsCount = 0;
         for (String uniqueWord : new HashSet<>(words)) {
             long uniqueWordOccurrencesNumber = words.stream().filter(uniqueWord::equals).count();
             if (uniqueWordOccurrencesNumber > 1) {
-                repeatWordsCount += uniqueWordOccurrencesNumber;
+                System.out.println(uniqueWordOccurrencesNumber);
             }
         }
-        System.out.println(repeatWordsCount);
         split();
     }
 
