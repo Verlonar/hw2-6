@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -29,9 +27,64 @@ public class Main {
             }
         }
         split();
+
+        //Задание 5
+        for (int i = 0; i < nums.size(); i++) {
+            if(nums.get(i) == 0) {
+                continue;
+            }
+            if (nums.stream().filter(nums.get(i)::equals).count() > 1) {
+                int num = nums.get(i);
+                for (int j = 0; j < nums.size(); j++) {
+                    if (nums.get(j) == num) {
+                        nums.set(j, 0);
+                    }
+                }
+            } else {
+                nums.set(i, 1);
+            }
+        }
+        System.out.println(nums.stream().mapToInt(Integer::intValue).sum());
+        split();
+
+        //Задание 6
+        List<String[]> wordsPairs = new ArrayList<>();
+        wordsPairs.add(new String[]{"ab", "abba"});
+        wordsPairs.add(new String[]{"ab", "ab"});
+        wordsPairs.add(new String[]{"abc", "ab"});
+        wordsPairs.add(new String[]{"abc", "abccba"});
+
+        for (String[] wordsPair : wordsPairs) {
+            wordsCharsEquals(wordsPair);
+        }
+        split();
+
+        //Задание 7
+        wordsPairs.clear();
+        wordsPairs.add(new String[]{"abc", "bca"});
+        wordsPairs.add(new String[]{"abbc", "bca"});
+        wordsPairs.add(new String[]{"cat", "act"});
+        wordsPairs.add(new String[]{"cat", "dog"});
+
+        for (String[] wordsPair : wordsPairs) {
+            if (wordsPair[0].length() != wordsPair[1].length()) {
+                System.out.println(false);
+            } else {
+                wordsCharsEquals(wordsPair);
+            }
+        }
+        split();
+    }
+
+    private static void wordsCharsEquals(String[] wordsPair) {
+        Set<String> set1 = new TreeSet<>(List.of(wordsPair[0].split("")));
+        Set<String> set2 = new TreeSet<>(List.of(wordsPair[1].split("")));
+        System.out.println((set1).equals(set2));
     }
 
     private static void split() {
         System.out.println("-----------------------------");
     }
+
+
 }
